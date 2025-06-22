@@ -13,11 +13,19 @@
 <meta property="og:site_name" content="wArn&#39;s blog">
 <meta property="og:description" content="[NISACTF 2022]checkin    如何在010editor复制16进制，Ctrl+Shift+c就可以复制16进制。 通过赛博厨子将16进制解码，再进行url编码就可以。       也可以写到文件里面通过脚本进行url编码： 1234567891011121314&lt;?phpfunction file_read($path)&#123;    $f &#x3D; fopen($path">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250622171959520.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-06-22%20185658.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250622191440121.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250622191508988.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250622191523157.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250622155012937.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250622162942933.png">
 <meta property="article:published_time" content="2025-06-22T05:04:23.000Z">
 <meta property="article:modified_time" content="2025-06-22T11:17:08.418Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="CTFwp">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250622171959520.png">
     
     
       
@@ -165,22 +173,22 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h2 id="NISACTF-2022-checkin"><a href="#NISACTF-2022-checkin" class="headerlink" title="[NISACTF 2022]checkin"></a>[NISACTF 2022]checkin</h2>
+    <h2 id="NISACTF-2022-checkin"><a href="#NISACTF-2022-checkin" class="headerlink" title="[NISACTF 2022]checkin"></a>[NISACTF 2022]checkin</h2><img src="/CTFwp/NISACTF-2022/image-20250622171959520.png" class="" title="image-20250622171959520">
 
-
+<img src="/CTFwp/NISACTF-2022/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202025-06-22%20185658.png" class="" title="屏幕截图 2025-06-22 185658">
 
 <p><strong>如何在010editor复制16进制，Ctrl+Shift+c就可以复制16进制。</strong></p>
 <p>通过赛博厨子将16进制解码，再进行url编码就可以。</p>
+<img src="/CTFwp/NISACTF-2022/image-20250622191440121.png" class="" title="image-20250622191440121">
 
+<img src="/CTFwp/NISACTF-2022/image-20250622191508988.png" class="" title="image-20250622191508988">
 
-
-
-
+<img src="/CTFwp/NISACTF-2022/image-20250622191523157.png" class="" title="image-20250622191523157">
 
 <p>也可以写到文件里面通过脚本进行url编码：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">file_read</span>(<span class="params"><span class="variable">$path</span></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$f</span> = <span class="title function_ invoke__">fopen</span>(<span class="variable">$path</span>,<span class="string">&quot;rb&quot;</span>);</span><br><span class="line">    <span class="variable">$data</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$f</span>,<span class="title function_ invoke__">filesize</span>(<span class="variable">$path</span>));</span><br><span class="line">    <span class="title function_ invoke__">fclose</span>(<span class="variable">$f</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$data</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$data1</span> = <span class="title function_ invoke__">file_read</span>(<span class="string">&quot;./1.txt&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">rawurlencode</span>(<span class="variable">$data1</span>).<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="variable">$data2</span> = <span class="title function_ invoke__">file_read</span>(<span class="string">&quot;./2.txt&quot;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="title function_ invoke__">rawurlencode</span>(<span class="variable">$data2</span>);</span><br><span class="line"><span class="comment"># %E2%80%AE%E2%81%A6%20Flag%21%E2%81%A9%E2%81%A6N1SACTF</span></span><br><span class="line"><span class="comment"># %E2%80%AE%E2%81%A6Ugeiwo%E2%81%A9%E2%81%A6cuishiyuan</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="NISACTF-2022-babyupload"><a href="#NISACTF-2022-babyupload" class="headerlink" title="[NISACTF 2022]babyupload"></a>[NISACTF 2022]babyupload</h2>
+<h2 id="NISACTF-2022-babyupload"><a href="#NISACTF-2022-babyupload" class="headerlink" title="[NISACTF 2022]babyupload"></a>[NISACTF 2022]babyupload</h2><img src="/CTFwp/NISACTF-2022/image-20250622155012937.png" class="" title="image-20250622155012937">
 
 <p>泄露了源码</p>
 <p>先分析&#x2F;路由：</p>
@@ -195,7 +203,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/file/&lt;id&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">file</span>(<span class="params"><span class="built_in">id</span></span>):</span><br><span class="line">    conn = db()</span><br><span class="line">    cur = conn.cursor()</span><br><span class="line">    cur.execute(<span class="string">&quot;select path from files where id=?&quot;</span>, (<span class="built_in">id</span>,))</span><br><span class="line">    res = cur.fetchone() <span class="comment">#获取单行数据</span></span><br><span class="line">    <span class="keyword">if</span> res <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;File not found&quot;</span>, <span class="number">404</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># print(res[0])</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(os.path.join(<span class="string">&quot;uploads/&quot;</span>, res[<span class="number">0</span>]), <span class="string">&quot;r&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">return</span> f.read()</span><br><span class="line"><span class="comment"># res[0] 以/开头，uploads/会被省略</span></span><br><span class="line"><span class="comment"># 此题主要考察的是就是上面这个。</span></span><br></pre></td></tr></table></figure>
 
 <p>如果我们上传了一个文件名为&#x2F;flag，那么打开的时候，是打开的&#x2F;flag，而不是我们上传的&#x2F;uploads&#x2F;flag。</p>
-
+<img src="/CTFwp/NISACTF-2022/image-20250622162942933.png" class="" title="image-20250622162942933">
 
 <p>题目做完了，我们看看其他知识点：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.before_first_request </span><span class="comment"># 第一次请求前执行一次，flask2.3被删除，flask2.2弃用</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">setup</span>():</span><br><span class="line">    os.remove(<span class="string">&quot;database.db&quot;</span>) <span class="comment"># 删除database.db</span></span><br><span class="line">    cur = db().cursor() <span class="comment"># 创建游标(用于执行sql语句)</span></span><br><span class="line">    cur.executescript(SCHEMA) <span class="comment"># 创建表格</span></span><br></pre></td></tr></table></figure>
