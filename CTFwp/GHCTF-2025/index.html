@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/GHCTF-2025/image-20250702173132577.png">
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/GHCTF-2025/image-20250702173145120.png">
 <meta property="article:published_time" content="2025-06-13T02:50:19.000Z">
-<meta property="article:modified_time" content="2025-07-02T12:52:33.001Z">
+<meta property="article:modified_time" content="2025-07-02T12:54:47.779Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="CTFwp">
 <meta name="twitter:card" content="summary">
@@ -281,7 +281,7 @@
 <img src="/CTFwp/GHCTF-2025/image-20250702171432898.png" class="" title="image-20250702171432898">
 
 <p>我们现在需要isadmin为1。</p>
-<p>前面waf哪里就可以进行字符的增加和减少，感觉可以进行字符串逃逸。</p>
+<p>前面waf那里就可以进行字符的增加和减少，感觉可以进行字符串逃逸。</p>
 <p><code>&quot;;s:7:&quot;isadmin&quot;;b:1;&#125;</code>为21个字符，我选择的是<code>||</code>，<code>||</code>到error，相差3个字符，27除以3，为7，所以要输入7次||，再拼接”;s:7:”isadmin”;b:1;}就可以。</p>
 <img src="/CTFwp/GHCTF-2025/image-20250702171918436.png" class="" title="image-20250702171918436">
 
