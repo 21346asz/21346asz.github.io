@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="[CISCN2019 华东南赛区]Web4  任意文件读，读取&#x2F;app&#x2F;app.py 1234567891011121314151617181920212223242526272829303132333435363738394041# encoding:utf-8import re, random, uuid, urllibfrom flask import Flask, se">
+<meta property="og:type" content="article">
+<meta property="og:title" content="session 伪造">
+<meta property="og:url" content="https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/index.html">
+<meta property="og:site_name" content="wArn&#39;s blog">
+<meta property="og:description" content="[CISCN2019 华东南赛区]Web4  任意文件读，读取&#x2F;app&#x2F;app.py 1234567891011121314151617181920212223242526272829303132333435363738394041# encoding:utf-8import re, random, uuid, urllibfrom flask import Flask, se">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/image-20250714100510425.png">
+<meta property="og:image" content="https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/image-20250714101416864.png">
+<meta property="og:image" content="https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/image-20250714101638286.png">
+<meta property="og:image" content="https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/image-20250714101655940.png">
+<meta property="article:published_time" content="2025-07-14T02:03:13.000Z">
+<meta property="article:modified_time" content="2025-07-14T02:46:23.115Z">
+<meta property="article:author" content="wArn">
+<meta property="article:tag" content="session伪造">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/image-20250714100510425.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>session 伪造</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/*">About</a></li><!--
+     --><!--
+       --><li><a href="/categories/">categories</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a href="/tags/">tags</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/CTFwp/DASCTF-2023-0X401%E4%B8%83%E6%9C%88%E6%9A%91%E6%9C%9F%E6%8C%91%E6%88%98%E8%B5%9B/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&text=session 伪造"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&title=session 伪造"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&is_video=false&description=session 伪造"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=session 伪造&body=Check out this article: https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&title=session 伪造"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&title=session 伪造"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&title=session 伪造"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&title=session 伪造"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&name=session 伪造&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&t=session 伪造"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CISCN2019-%E5%8D%8E%E4%B8%9C%E5%8D%97%E8%B5%9B%E5%8C%BA-Web4"><span class="toc-number">1.</span> <span class="toc-text">[CISCN2019 华东南赛区]Web4</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        session 伪造
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">wArn</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2025-07-14T02:03:13.000Z" class="dt-published" itemprop="datePublished">2025-07-14</time>
+        
+        (Updated: <time datetime="2025-07-14T02:46:23.115Z" class="dt-updated" itemprop="dateModified">2025-07-14</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/session%E4%BC%AA%E9%80%A0/">session伪造</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/session%E4%BC%AA%E9%80%A0/" rel="tag">session伪造</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="CISCN2019-华东南赛区-Web4"><a href="#CISCN2019-华东南赛区-Web4" class="headerlink" title="[CISCN2019 华东南赛区]Web4"></a>[CISCN2019 华东南赛区]Web4</h2><img src="/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/image-20250714100510425.png" class="" title="image-20250714100510425">
+
+<p>任意文件读，读取&#x2F;app&#x2F;app.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># encoding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> re, random, uuid, urllib</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, session, request</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">random.seed(uuid.getnode()) </span><br><span class="line">app.config[<span class="string">&#x27;SECRET_KEY&#x27;</span>] = <span class="built_in">str</span>(random.random()*<span class="number">233</span>)</span><br><span class="line">app.debug = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    session[<span class="string">&#x27;username&#x27;</span>] = <span class="string">&#x27;www-data&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello World! &lt;a href=&quot;/read?url=https://baidu.com&quot;&gt;Read somethings&lt;/a&gt;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/read&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read</span>():</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        url = request.args.get(<span class="string">&#x27;url&#x27;</span>)</span><br><span class="line">        m = re.findall(<span class="string">&#x27;^file.*&#x27;</span>, url, re.IGNORECASE)</span><br><span class="line">        n = re.findall(<span class="string">&#x27;flag&#x27;</span>, url, re.IGNORECASE)</span><br><span class="line">        <span class="keyword">if</span> m <span class="keyword">or</span> n:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&#x27;No Hack&#x27;</span></span><br><span class="line">        res = urllib.urlopen(url)</span><br><span class="line">        <span class="keyword">return</span> res.read()</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> ex:</span><br><span class="line">        <span class="built_in">print</span> <span class="built_in">str</span>(ex)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;no response&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/flag&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">flag</span>():</span><br><span class="line">    <span class="keyword">if</span> session <span class="keyword">and</span> session[<span class="string">&#x27;username&#x27;</span>] == <span class="string">&#x27;fuck&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">open</span>(<span class="string">&#x27;/flag.txt&#x27;</span>).read()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;Access denied&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(</span><br><span class="line">        debug=<span class="literal">True</span>,</span><br><span class="line">        host=<span class="string">&quot;0.0.0.0&quot;</span></span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+<p><code>random.random()在0-1之间，random.seed()设置随机数种子，此环境为python2，uuid.getnode获取网卡的MAC地址，linux的地址在/sys/class/net/eth0/address</code></p>
+<p>可以通过&#x2F;read路由获得&#x2F;sys&#x2F;class&#x2F;net&#x2F;eth0&#x2F;address的值。</p>
+<img src="/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/image-20250714101416864.png" class="" title="image-20250714101416864">
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">a = <span class="string">&#x27;ca:79:65:d7:ae:ba&#x27;</span></span><br><span class="line">a = a.replace(<span class="string">&#x27;:&#x27;</span>,<span class="string">&#x27;&#x27;</span>)</span><br><span class="line">random.seed(<span class="built_in">int</span>(a,<span class="number">16</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>(random.random()*<span class="number">233</span>))</span><br></pre></td></tr></table></figure>
+
+<p>环境为python2，那就用python2运行。</p>
+<p>密钥为：79.2721329801</p>
+<img src="/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/image-20250714101638286.png" class="" title="image-20250714101638286">
+
+<img src="/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/image-20250714101655940.png" class="" title="image-20250714101655940">
+
+<p>反思：在进行代码审计的时候一定要认真的理清代码逻辑，不知道的代码，查就可以；收集信息的时候，明知道是python2环境，用python3去运行代码获得secret是很蠢的一个行为。</p>
+
+  </div>
+</article>
+
+    <div class="blog-post-comments">
+        <div id="disqus_thread">
+            <noscript>Please enable JavaScript to view the comments.</noscript>
+        </div>
+    </div>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">Home</a></li>
+        
+          <li><a href="/about/*">About</a></li>
+        
+          <li><a href="/categories/">categories</a></li>
+        
+          <li><a href="/search/">Search</a></li>
+        
+          <li><a href="/tags/">tags</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CISCN2019-%E5%8D%8E%E4%B8%9C%E5%8D%97%E8%B5%9B%E5%8C%BA-Web4"><span class="toc-number">1.</span> <span class="toc-text">[CISCN2019 华东南赛区]Web4</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&text=session 伪造"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&title=session 伪造"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&is_video=false&description=session 伪造"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=session 伪造&body=Check out this article: https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&title=session 伪造"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&title=session 伪造"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&title=session 伪造"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&title=session 伪造"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&name=session 伪造&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://21346asz.github.io/session%E4%BC%AA%E9%80%A0/session-%E4%BC%AA%E9%80%A0/&t=session 伪造"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+      <div class="footer-left">
+        Copyright &copy;
+        
+        
+        2025
+        wArn
+      </div>
+      <div class="footer-right">
+        <nav>
+          <ul>
+            <!--
+          --><li><a href="/">Home</a></li><!--
+        --><!--
+          --><li><a href="/about/*">About</a></li><!--
+        --><!--
+          --><li><a href="/categories/">categories</a></li><!--
+        --><!--
+          --><li><a href="/search/">Search</a></li><!--
+        --><!--
+          --><li><a href="/tags/">tags</a></li><!--
+        -->
+          </ul>
+          <ul>
+            
+              <!-- 不蒜子统计 -->
+              <span id="busuanzi_container_site_pv">
+                  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+              </span>
+              <span class="post-meta-divider">|</span>
+              <span id="busuanzi_container_site_uv" style='display:none'>
+                      本站访客数<span id="busuanzi_value_site_uv"></span>人
+              </span>
+            <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            
+          </ul>
+        </nav>
+      </div>
+      
+</footer>
+
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'ctferwArn';
+
+        (function(){
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+    </script>
+
+<!-- utterances Comments -->
+
+</body>
+</html>
