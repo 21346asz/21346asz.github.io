@@ -6,18 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="接受任意签名实验要求：本实验室使用基于 JWT 的机制来处理会话。由于实现缺陷，服务器不会验证收到的任何 JWT 的签名。 要解决该实验，请修改您的会话令牌以访问 的管理面板&#x2F;admin，然后删除用户carlos。 您可以使用以下凭证登录您自己的帐户：wiener:peter 进行实验点击右上角的My account，用wiener:peter进行登录。 1cookie: session&#x3D;eyJr">
+    <meta name="description" content="接受任意签名实验要求：本实验室使用基于 JWT 的机制来处理会话。由于实现缺陷，服务器不会验证收到的任何 JWT 的签名。 要解决该实验，请修改您的会话令牌以访问&#x2F;admin的管理面板，然后删除用户carlos。 您可以使用以下凭证登录您自己的帐户：wiener:peter 进行实验点击右上角的My account，用wiener:peter进行登录。 1cookie: session&#x3D;eyJra">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JWT 安全">
 <meta property="og:url" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/index.html">
 <meta property="og:site_name" content="wArn&#39;s blog">
-<meta property="og:description" content="接受任意签名实验要求：本实验室使用基于 JWT 的机制来处理会话。由于实现缺陷，服务器不会验证收到的任何 JWT 的签名。 要解决该实验，请修改您的会话令牌以访问 的管理面板&#x2F;admin，然后删除用户carlos。 您可以使用以下凭证登录您自己的帐户：wiener:peter 进行实验点击右上角的My account，用wiener:peter进行登录。 1cookie: session&#x3D;eyJr">
+<meta property="og:description" content="接受任意签名实验要求：本实验室使用基于 JWT 的机制来处理会话。由于实现缺陷，服务器不会验证收到的任何 JWT 的签名。 要解决该实验，请修改您的会话令牌以访问&#x2F;admin的管理面板，然后删除用户carlos。 您可以使用以下凭证登录您自己的帐户：wiener:peter 进行实验点击右上角的My account，用wiener:peter进行登录。 1cookie: session&#x3D;eyJra">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250715110355377.png">
 <meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250715111306887.png">
 <meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250715111406605.png">
+<meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716071958763.png">
+<meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716072253796.png">
 <meta property="article:published_time" content="2025-07-15T02:53:24.000Z">
-<meta property="article:modified_time" content="2025-07-15T03:30:51.169Z">
+<meta property="article:modified_time" content="2025-07-15T23:23:37.669Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="JWT 安全">
 <meta name="twitter:card" content="summary">
@@ -119,7 +121,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%97%E4%BB%BB%E6%84%8F%E7%AD%BE%E5%90%8D"><span class="toc-number">1.</span> <span class="toc-text">接受任意签名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%97%E4%BB%BB%E6%84%8F%E7%AD%BE%E5%90%8D"><span class="toc-number">1.</span> <span class="toc-text">接受任意签名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%97%A0%E7%AD%BE%E5%90%8D%E7%9A%84%E4%BB%A4%E7%89%8C"><span class="toc-number">2.</span> <span class="toc-text">接收无签名的令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A-1"><span class="toc-number">2.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C-1"><span class="toc-number">2.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -146,7 +148,7 @@
       
         <time datetime="2025-07-15T02:53:24.000Z" class="dt-published" itemprop="datePublished">2025-07-15</time>
         
-        (Updated: <time datetime="2025-07-15T03:30:51.169Z" class="dt-updated" itemprop="dateModified">2025-07-15</time>)
+        (Updated: <time datetime="2025-07-15T23:23:37.669Z" class="dt-updated" itemprop="dateModified">2025-07-16</time>)
         
       
     </div>
@@ -171,10 +173,10 @@
   
 
   <div class="content e-content" itemprop="articleBody">
-    <h3 id="接受任意签名"><a href="#接受任意签名" class="headerlink" title="接受任意签名"></a>接受任意签名</h3><h4 id="实验要求："><a href="#实验要求：" class="headerlink" title="实验要求："></a>实验要求：</h4><p>本实验室使用基于 JWT 的机制来处理会话。由于实现缺陷，服务器不会验证收到的任何 JWT 的签名。</p>
-<p>要解决该实验，请修改您的会话令牌以访问 的管理面板<code>/admin</code>，然后删除用户<code>carlos</code>。</p>
+    <h2 id="接受任意签名"><a href="#接受任意签名" class="headerlink" title="接受任意签名"></a>接受任意签名</h2><h3 id="实验要求："><a href="#实验要求：" class="headerlink" title="实验要求："></a>实验要求：</h3><p>本实验室使用基于 JWT 的机制来处理会话。由于实现缺陷，服务器不会验证收到的任何 JWT 的签名。</p>
+<p>要解决该实验，请修改您的会话令牌以访问<code>/admin</code>的管理面板，然后删除用户<code>carlos</code>。</p>
 <p>您可以使用以下凭证登录您自己的帐户：<code>wiener:peter</code></p>
-<h4 id="进行实验"><a href="#进行实验" class="headerlink" title="进行实验"></a>进行实验</h4><p>点击右上角的My account，用<code>wiener:peter</code>进行登录。</p>
+<h3 id="进行实验"><a href="#进行实验" class="headerlink" title="进行实验"></a>进行实验</h3><p>点击右上角的My account，用<code>wiener:peter</code>进行登录。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cookie: session=eyJraWQiOiIwYzdiNWRmZi00NzcyLTQyMzctOTJlMy1jMTk4MTE5MjVkMjgiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJwb3J0c3dpZ2dlciIsImV4cCI6MTc1MjU1MzIwOCwic3ViIjoid2llbmVyIn0.EuFkMQ2v_UpDgAl94DsYivdF5aYGDjJaxGfrJ_00exSOO_C_YuXKK1UK6sWxCYygICnJOs-GAUypbLUwNA1eAzq5vu-RxYoiGLj_S3Z9nXL6YIPF2DHRCb3MBIRDqf6_7gQAy6aa3XxMaEVECKYMu13rxgFigo473cOXuBx_St1vARpwfT-wucoqonjkX7FAt49NK9KxqXlD_xZ77XEZInRSzZYq16Qc71igqLBp-J9FqijOCgfHH1ljVgjx1zOAOzHb2ziEZrcBVALCzhCQyF6aO0QSuLnAUTZOFZFUzG4Bh0sefh_NeQajQwcBCv_nU3qgl6ycBzDnp2BOgckhSg</span><br></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="https://jwt.io/">解析工具</a></p>
@@ -190,6 +192,21 @@
 
 <p>利用我们构造好的JWT访问&#x2F;admin路由，删除<code>carlos</code>，就可以完成实验要求。</p>
 <p>这个实验告诉我们：后端不能只解码jwt，也要进行验证。</p>
+<h2 id="接收无签名的令牌"><a href="#接收无签名的令牌" class="headerlink" title="接收无签名的令牌"></a>接收无签名的令牌</h2><h3 id="实验要求：-1"><a href="#实验要求：-1" class="headerlink" title="实验要求："></a>实验要求：</h3><p>本实验使用基于 JWT 的机制来处理会话。服务器配置不安全，无法接受未签名的 JWT。</p>
+<p>要解决该实验，请修改您的会话令牌以访问<code>/admin</code>的管理面板，然后删除用户<code>carlos</code>。</p>
+<p>您可以使用以下凭证登录您自己的帐户：<code>wiener:peter</code></p>
+<h3 id="进行实验-1"><a href="#进行实验-1" class="headerlink" title="进行实验"></a>进行实验</h3><p>使用实验给我们的账户登录右上角的My account。</p>
+<p>再利用抓包工具进行抓包，获取jwt令牌，将其放在jwt解析工具里面解析：</p>
+<img src="/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716071958763.png" class="" title="image-20250716071958763">
+
+<p>sub的值是我们的用户名；接着访问admin路由：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Admin interface only available if logged in as an administrator</span><br></pre></td></tr></table></figure>
+
+<p>告诉我们只有administrator才可以进行访问。</p>
+<p>修改sub为administrator，将alg的算法修改为none，接着删除签名部分，<strong>要保留最后的点</strong>。</p>
+<img src="/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716072253796.png" class="" title="image-20250716072253796">
+
+<p>用此令牌进行访问，然后删除用户<code>carlos</code>，实验完成。</p>
 
   </div>
 </article>
@@ -225,7 +242,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%97%E4%BB%BB%E6%84%8F%E7%AD%BE%E5%90%8D"><span class="toc-number">1.</span> <span class="toc-text">接受任意签名</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%97%E4%BB%BB%E6%84%8F%E7%AD%BE%E5%90%8D"><span class="toc-number">1.</span> <span class="toc-text">接受任意签名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%97%A0%E7%AD%BE%E5%90%8D%E7%9A%84%E4%BB%A4%E7%89%8C"><span class="toc-number">2.</span> <span class="toc-text">接收无签名的令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A-1"><span class="toc-number">2.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C-1"><span class="toc-number">2.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li></ol>
       </div>
     
 
