@@ -18,8 +18,10 @@
 <meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250715111406605.png">
 <meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716071958763.png">
 <meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716072253796.png">
+<meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716094930421.png">
+<meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716095333215.png">
 <meta property="article:published_time" content="2025-07-15T02:53:24.000Z">
-<meta property="article:modified_time" content="2025-07-15T23:23:37.669Z">
+<meta property="article:modified_time" content="2025-07-16T01:55:46.728Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="JWT 安全">
 <meta name="twitter:card" content="summary">
@@ -121,7 +123,7 @@
     
     
       <div id="toc">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%97%E4%BB%BB%E6%84%8F%E7%AD%BE%E5%90%8D"><span class="toc-number">1.</span> <span class="toc-text">接受任意签名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%97%A0%E7%AD%BE%E5%90%8D%E7%9A%84%E4%BB%A4%E7%89%8C"><span class="toc-number">2.</span> <span class="toc-text">接收无签名的令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A-1"><span class="toc-number">2.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C-1"><span class="toc-number">2.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%97%E4%BB%BB%E6%84%8F%E7%AD%BE%E5%90%8D"><span class="toc-number">1.</span> <span class="toc-text">接受任意签名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%97%A0%E7%AD%BE%E5%90%8D%E7%9A%84%E4%BB%A4%E7%89%8C"><span class="toc-number">2.</span> <span class="toc-text">接收无签名的令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A-1"><span class="toc-number">2.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C-1"><span class="toc-number">2.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E5%AF%86%E9%92%A5"><span class="toc-number">3.</span> <span class="toc-text">暴力破解密钥</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A-2"><span class="toc-number">3.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C-2"><span class="toc-number">3.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li></ol>
       </div>
     
   </span>
@@ -148,7 +150,7 @@
       
         <time datetime="2025-07-15T02:53:24.000Z" class="dt-published" itemprop="datePublished">2025-07-15</time>
         
-        (Updated: <time datetime="2025-07-15T23:23:37.669Z" class="dt-updated" itemprop="dateModified">2025-07-16</time>)
+        (Updated: <time datetime="2025-07-16T01:55:46.728Z" class="dt-updated" itemprop="dateModified">2025-07-16</time>)
         
       
     </div>
@@ -207,6 +209,23 @@
 <img src="/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716072253796.png" class="" title="image-20250716072253796">
 
 <p>用此令牌进行访问，然后删除用户<code>carlos</code>，实验完成。</p>
+<h2 id="暴力破解密钥"><a href="#暴力破解密钥" class="headerlink" title="暴力破解密钥"></a>暴力破解密钥</h2><h3 id="实验要求：-2"><a href="#实验要求：-2" class="headerlink" title="实验要求："></a>实验要求：</h3><p>本实验使用基于 JWT 的机制来处理会话。它使用一个非常弱的密钥来签名和验证令牌。使用一个包含<a target="_blank" rel="noopener" href="https://github.com/wallarm/jwt-secrets/blob/master/jwt.secrets.list">常用密钥的字典</a>很容易进行暴力破解。</p>
+<p>要破解这个实验，首先要暴力破解网站的密钥。获取密钥后，用它对修改后的会话令牌进行签名，该令牌将授予你访问<code>/admin</code>管理面板的权限，然后删除该用户<code>carlos</code>。</p>
+<p>您可以使用以下凭证登录您自己的帐户：<code>wiener:peter</code></p>
+<h3 id="进行实验-2"><a href="#进行实验-2" class="headerlink" title="进行实验"></a>进行实验</h3><p>通过实验要求给的账户登录右上角的My account。</p>
+<p>获取jwt令牌，通过hashcat爆破secret：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">hash</span> -a 0 -m 16500 jwt key.list</span><br><span class="line"><span class="comment"># -a 0 表示攻击模式为字典攻击</span></span><br><span class="line"><span class="comment"># -m 16500 对应JWT(HS256/HS384/HS512)签名破解</span></span><br><span class="line"><span class="comment">#	 16501 非对称RSA签名(通常不可破解)</span></span><br><span class="line"><span class="comment"># 如果多次运行该命令，则需要包含--show标志输出结果</span></span><br><span class="line"><span class="comment"># 输出结果为`jwt:secret`</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -a 0 -m 16500 eyJraWQiOiI5YzUzMzAxNy01YmRhLTQxOTgtYjZlOC0yZmUxMzY3NDYzMWYiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJwb3J0c3dpZ2dlciIsImV4cCI6MTc1MjYzNDA1NCwic3ViIjoid2llbmVyIn0._b3_tdVPrKZ3HuvQTiM7nmrC3APiGDYW-gzoM5JYNeU ./jwt.secrets.list</span><br></pre></td></tr></table></figure>
+
+<img src="/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716094930421.png" class="" title="image-20250716094930421">
+
+<p>密钥为secret1。</p>
+<p>在登录&#x2F;admin时发现要administrator才能登录。</p>
+<p>伪造jwt:</p>
+<img src="/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716095333215.png" class="" title="image-20250716095333215">
+
+<p>通过我们伪造的jwt访问&#x2F;admin路由，删除<code>carlos</code>，完成实验。</p>
 
   </div>
 </article>
@@ -242,7 +261,7 @@
     
     
       <div id="toc-footer" style="display: none">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%97%E4%BB%BB%E6%84%8F%E7%AD%BE%E5%90%8D"><span class="toc-number">1.</span> <span class="toc-text">接受任意签名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%97%A0%E7%AD%BE%E5%90%8D%E7%9A%84%E4%BB%A4%E7%89%8C"><span class="toc-number">2.</span> <span class="toc-text">接收无签名的令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A-1"><span class="toc-number">2.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C-1"><span class="toc-number">2.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%8F%97%E4%BB%BB%E6%84%8F%E7%AD%BE%E5%90%8D"><span class="toc-number">1.</span> <span class="toc-text">接受任意签名</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E6%94%B6%E6%97%A0%E7%AD%BE%E5%90%8D%E7%9A%84%E4%BB%A4%E7%89%8C"><span class="toc-number">2.</span> <span class="toc-text">接收无签名的令牌</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A-1"><span class="toc-number">2.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C-1"><span class="toc-number">2.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E5%AF%86%E9%92%A5"><span class="toc-number">3.</span> <span class="toc-text">暴力破解密钥</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%A6%81%E6%B1%82%EF%BC%9A-2"><span class="toc-number">3.1.</span> <span class="toc-text">实验要求：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E8%A1%8C%E5%AE%9E%E9%AA%8C-2"><span class="toc-number">3.2.</span> <span class="toc-text">进行实验</span></a></li></ol></li></ol>
       </div>
     
 
