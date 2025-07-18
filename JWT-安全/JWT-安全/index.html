@@ -23,7 +23,7 @@
 <meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250718110619333.png">
 <meta property="og:image" content="https://21346asz.github.io/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250718111209625.png">
 <meta property="article:published_time" content="2025-07-15T02:53:24.000Z">
-<meta property="article:modified_time" content="2025-07-18T03:15:30.622Z">
+<meta property="article:modified_time" content="2025-07-18T03:20:58.893Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="JWT 安全">
 <meta name="twitter:card" content="summary">
@@ -84,9 +84,11 @@
      --><!--
        --><li><a href="/categories/">categories</a></li><!--
      --><!--
-       --><li><a href="/search/">Search</a></li><!--
-     --><!--
        --><li><a href="/tags/">tags</a></li><!--
+     --><!--
+       --><li><a href="/project/">project</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
      -->
       </ul>
     </span>
@@ -152,7 +154,7 @@
       
         <time datetime="2025-07-15T02:53:24.000Z" class="dt-published" itemprop="datePublished">2025-07-15</time>
         
-        (Updated: <time datetime="2025-07-18T03:15:30.622Z" class="dt-updated" itemprop="dateModified">2025-07-18</time>)
+        (Updated: <time datetime="2025-07-18T03:20:58.893Z" class="dt-updated" itemprop="dateModified">2025-07-18</time>)
         
       
     </div>
@@ -228,7 +230,7 @@
 <img src="/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250716095333215.png" class="" title="image-20250716095333215">
 
 <p>通过我们伪造的jwt访问&#x2F;admin路由，删除<code>carlos</code>，完成实验。</p>
-<h2 id="JWT标头参数注入"><a href="#JWT标头参数注入" class="headerlink" title="JWT标头参数注入"></a>JWT标头参数注入</h2><h3 id="jwk参数注入自动签名"><a href="#jwk参数注入自动签名" class="headerlink" title="jwk参数注入自动签名"></a>jwk参数注入自动签名</h3><h4 id="实验要求：-3"><a href="#实验要求：-3" class="headerlink" title="实验要求："></a>实验要求：</h4><p>本实验室使用基于 JWT 的机制来处理会话。服务器支持<code>jwk</code>JWT 标头中的参数。有时，该机制会将正确的验证密钥直接嵌入令牌中。然而，它无法检查所提供的密钥是否来自可信来源。</p>
+<h2 id="JWT标头参数注入"><a href="#JWT标头参数注入" class="headerlink" title="JWT标头参数注入"></a>JWT标头参数注入</h2><h3 id="jwk参数注入自动签名"><a href="#jwk参数注入自动签名" class="headerlink" title="jwk参数注入自动签名"></a>jwk参数注入自动签名</h3><h4 id="实验要求：-3"><a href="#实验要求：-3" class="headerlink" title="实验要求："></a>实验要求：</h4><p>本实验室使用基于 JWT 的机制来处理会话。服务器支持JWT 标头中的<code>jwk</code>参数。有时，该机制会将正确的验证密钥直接嵌入令牌中。然而，它无法检查所提供的密钥是否来自可信来源。</p>
 <p>要解决该实验，请修改并签署一个 JWT，该 JWT 允许您访问<code>/admin</code>的管理面板，然后删除用户<code>carlos</code>。</p>
 <p>您可以使用以下凭证登录您自己的帐户：<code>wiener:peter</code></p>
 <h4 id="进行实验-3"><a href="#进行实验-3" class="headerlink" title="进行实验"></a>进行实验</h4><p>通过实验要求给的账户登录My account。</p>
@@ -241,6 +243,7 @@
 <img src="/JWT-%E5%AE%89%E5%85%A8/JWT-%E5%AE%89%E5%85%A8/image-20250718111209625.png" class="" title="image-20250718111209625">
 
 <p>将我们生成的密钥放入其中进行加密，用我们生成的jwt令牌访问&#x2F;admin路由，然后删除实验要求的用户即可。</p>
+<p>第二种方法就是通过burpsuite的两个插件联合使用攻克这道题。</p>
 
   </div>
 </article>
@@ -266,9 +269,11 @@
         
           <li><a href="/categories/">categories</a></li>
         
-          <li><a href="/search/">Search</a></li>
-        
           <li><a href="/tags/">tags</a></li>
+        
+          <li><a href="/project/">project</a></li>
+        
+          <li><a href="/search/">Search</a></li>
         
       </ul>
     </div>
@@ -328,9 +333,11 @@
         --><!--
           --><li><a href="/categories/">categories</a></li><!--
         --><!--
-          --><li><a href="/search/">Search</a></li><!--
-        --><!--
           --><li><a href="/tags/">tags</a></li><!--
+        --><!--
+          --><li><a href="/project/">project</a></li><!--
+        --><!--
+          --><li><a href="/search/">Search</a></li><!--
         -->
           </ul>
           <ul>
