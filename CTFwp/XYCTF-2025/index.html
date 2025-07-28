@@ -18,7 +18,7 @@
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250728200006695.png">
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250728202802703.png">
 <meta property="article:published_time" content="2025-07-27T12:30:31.000Z">
-<meta property="article:modified_time" content="2025-07-28T12:34:24.669Z">
+<meta property="article:modified_time" content="2025-07-28T12:37:08.558Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="CTFwp">
 <meta name="twitter:card" content="summary">
@@ -147,7 +147,7 @@
       
         <time datetime="2025-07-27T12:30:31.000Z" class="dt-published" itemprop="datePublished">2025-07-27</time>
         
-        (Updated: <time datetime="2025-07-28T12:34:24.669Z" class="dt-updated" itemprop="dateModified">2025-07-28</time>)
+        (Updated: <time datetime="2025-07-28T12:37:08.558Z" class="dt-updated" itemprop="dateModified">2025-07-28</time>)
         
       
     </div>
@@ -235,7 +235,7 @@
 
 <img src="/CTFwp/XYCTF-2025/image-20250728202802703.png" class="" title="image-20250728202802703">
 
-<p>有两个url，我们访问127.0.0.1时，request.remote_addr返回127.0.0.1。访问192.168.0.100时，request.remote_addr返回192.168.0.100。如果代码<code>request.remote_addr == 127.0.0.1</code>，我们要访问的是127.0.0.1:5000。这就是本地回环访问。</p>
+<p>有两个url，我们访问127.0.0.1时，request.remote_addr返回127.0.0.1。访问192.168.0.100时，request.remote_addr返回192.168.0.100。如果代码<code>request.remote_addr == 127.0.0.1</code>，我们要访问的是127.0.0.1:5000。这就是本地回环访问。（<code>request.remote_addr</code> <strong>从 TCP&#x2F;IP 连接层获取</strong>，即直接取与服务器建立连接的客户端 IP）</p>
 <blockquote>
 <p>Fate考察的SSRF , Python的代码审计，sqlite。</p>
 <p>​	由于SSRF没学，有一些不自信，代码审计到&#x2F;proxy环节，开启了懦夫模式，我在开启懦夫模式之前，并没有想这个flag到底应该如何获得，flag到底应该从哪里获得，我觉得如果当时能再做的时间长一些，我应该会向这方面思考，事实是当时确实没有思考。</p>
