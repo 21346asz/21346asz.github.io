@@ -51,6 +51,13 @@
 <meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250729143716823.png">
 <meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250729143915705.png">
 <meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250729144419379.png">
+<meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250730100152059.png">
+<meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250730095938675.png">
+<meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250730100257643.png">
+<meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250730100526491.png">
+<meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250730100628951.png">
+<meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250730100912245.png">
+<meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250730101221902.png">
 <meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250724073356812.png">
 <meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250724073528487.png">
 <meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250724073818519.png">
@@ -58,7 +65,7 @@
 <meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250724111520821.png">
 <meta property="og:image" content="https://21346asz.github.io/XSS/XSS/image-20250724112537643.png">
 <meta property="article:published_time" content="2025-07-23T23:32:01.000Z">
-<meta property="article:modified_time" content="2025-07-30T01:03:24.903Z">
+<meta property="article:modified_time" content="2025-07-30T02:20:24.834Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="XSS">
 <meta name="twitter:card" content="summary">
@@ -189,7 +196,7 @@
       
         <time datetime="2025-07-23T23:32:01.000Z" class="dt-published" itemprop="datePublished">2025-07-24</time>
         
-        (Updated: <time datetime="2025-07-30T01:03:24.903Z" class="dt-updated" itemprop="dateModified">2025-07-30</time>)
+        (Updated: <time datetime="2025-07-30T02:20:24.834Z" class="dt-updated" itemprop="dateModified">2025-07-30</time>)
         
       
     </div>
@@ -429,7 +436,40 @@
 <h2 id="Bypass"><a href="#Bypass" class="headerlink" title="Bypass"></a>Bypass</h2><h3 id="大多数标签和属性被禁止的反射型XSS攻击"><a href="#大多数标签和属性被禁止的反射型XSS攻击" class="headerlink" title="大多数标签和属性被禁止的反射型XSS攻击"></a>大多数标签和属性被禁止的反射型XSS攻击</h3><h4 id="实验要求-1"><a href="#实验要求-1" class="headerlink" title="实验要求"></a>实验要求</h4><p>该实验在搜索功能中存在一个反射型XSS（跨站脚本）漏洞，但使用了Web应用防火墙(WAF)来防御常见的XSS攻击向量。</p>
 <p>实验目标是：构造一个能够绕过WAF防护并成功调用print()函数的跨站脚本攻击。</p>
 <p>重要说明：<br>您的解决方案必须无需任何用户交互。在您自己的浏览器中手动调用print()函数将无法完成实验。</p>
-<h4 id="实验过程-1"><a href="#实验过程-1" class="headerlink" title="实验过程"></a>实验过程</h4><h2 id="AFCTF-2021-BABY-CSP"><a href="#AFCTF-2021-BABY-CSP" class="headerlink" title="[AFCTF 2021]BABY_CSP"></a>[AFCTF 2021]BABY_CSP</h2><img src="/XSS/XSS/image-20250724073356812.png" class="" title="image-20250724073356812">
+<h4 id="实验过程-1"><a href="#实验过程-1" class="headerlink" title="实验过程"></a>实验过程</h4><p>实验告诉我们搜索功能这里存在反射型XSS漏洞。</p>
+<p>我在这里测试了好几个标签，如：<code>a、input、button、img、script</code>，这些都被过滤了。</p>
+<p><a target="_blank" rel="noopener" href="https://portswigger.net/web-security/cross-site-scripting/cheat-sheet">XSS payload 备忘录</a></p>
+<p>打开代理，打开yakit，启用交互式劫持，输入<code>&lt;&gt;</code>。</p>
+<p>进入Web Fuzzer。</p>
+<img src="/XSS/XSS/image-20250730100152059.png" class="" title="image-20250730100152059">
+
+<p>复制tags标签。</p>
+<img src="/XSS/XSS/image-20250730095938675.png" class="" title="image-20250730095938675">
+
+<p>插入到临时字典。</p>
+<img src="/XSS/XSS/image-20250730100257643.png" class="" title="image-20250730100257643">
+
+<p>发送请求。</p>
+<img src="/XSS/XSS/image-20250730100526491.png" class="" title="image-20250730100526491">
+
+<p>body标签可用，输入<code>&lt;body onload=alert()&gt;</code></p>
+<img src="/XSS/XSS/image-20250730100628951.png" class="" title="image-20250730100628951">
+
+<p>onload属性也被禁止了，复制events事件，插入到临时字典，发起请求。</p>
+<img src="/XSS/XSS/image-20250730100912245.png" class="" title="image-20250730100912245">
+
+<p>里面有一个onresize事件，属性没有禁止，如何触发onresize事件，当修改窗口大小时，会触发。</p>
+<img src="/XSS/XSS/image-20250730101221902.png" class="" title="image-20250730101221902">
+
+<p>题目要求:您的解决方案必须无需任何用户交互。在您自己的浏览器中手动调用print()函数将无法完成实验。</p>
+<p>进入服务器，在body输入：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">&#x27;https://0a0900ba03d4a87980091c2a00890047.web-security-academy.net/?search=%3Cbody+onresize%3Dprint%28%29+%3E&#x27;</span> <span class="attr">onload</span>=<span class="string">&#x27;this.style.height=300&#x27;</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>将其发给受害者，在加载完成后，触发onload事件，修改了高度，触发onresize事件，执行print()函数。</p>
+<blockquote>
+<p>此题是后端的waf。</p>
+</blockquote>
+<h2 id="AFCTF-2021-BABY-CSP"><a href="#AFCTF-2021-BABY-CSP" class="headerlink" title="[AFCTF 2021]BABY_CSP"></a>[AFCTF 2021]BABY_CSP</h2><img src="/XSS/XSS/image-20250724073356812.png" class="" title="image-20250724073356812">
 
 <p>源码里面本来没有任何内容，当我们点击标签时，页面源码会添加一些内容：</p>
 <img src="/XSS/XSS/image-20250724073528487.png" class="" title="image-20250724073528487">
