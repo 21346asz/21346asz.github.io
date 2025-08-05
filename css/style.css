@@ -1614,12 +1614,12 @@ pre code {
   border: none;
 }
 code {
-  background-color: #6a5acd;
+  background-color: #808080;
   padding: 0 5px;
-  border: 1px dotted #908d8d;
+  border: 1px solid #808080;
   border-radius: 2px;
   -webkit-border-radius: 2px;
-  color: #fff;
+  color: #fffafa;
 }
 .highlight {
   overflow-x: auto;
